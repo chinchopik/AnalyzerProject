@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:RemakeProject"
         xmlns:vm="clr-namespace:RemakeProject.ViewModels"
         mc:Ignorable="d"
-        Title="TextAnalyzer" Height="350" Width="600" WindowStartupLocation="CenterScreen">
+        Title="TextAnalyzer"
+        Height="350"
+        Width="600"
+        MinHeight="350"
+        MinWidth="600"
+        WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:TextAnalyze/>
