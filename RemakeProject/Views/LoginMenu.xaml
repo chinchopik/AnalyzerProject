@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RemakeProject.Views"
         xmlns:lm="clr-namespace:RemakeProject.ViewModels"
+        xmlns:controls="clr-namespace:RemakeProject.Controls"
         mc:Ignorable="d"
         Title="Login" Height="450" Width="600"
         WindowStyle="None"
@@ -75,31 +76,53 @@
                        VerticalAlignment="Bottom"
                        Margin="10,0,0,60"/>
 
-                <PasswordBox x:Name="PasswordInputBox"
-                             Grid.Row="1"    
-                             Style="{DynamicResource PasswordInputStyle}">
-                    <PasswordBox.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="4"/>
-                            <Setter Property="BorderThickness" Value="0.05"/>
+                <controls:BindablePasswordBox Password="{Binding Password}"
+                                              Grid.Row="1"
+                                              Margin="0,0,0,30"
+                                              VerticalAlignment="Bottom">
+
+                    <controls:BindablePasswordBox.Style>
+                        <Style TargetType="controls:BindablePasswordBox">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=ShowPassword, Path=IsChecked}" Value="True">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
                         </Style>
-                    </PasswordBox.Resources>
-                </PasswordBox>
+                    </controls:BindablePasswordBox.Style>
 
-                <TextBox x:Name="tempBox"
+                </controls:BindablePasswordBox>
+
+                <TextBox Height="30"
+                         Width="200"
+                         FontFamily="Calibri"
+                         FontSize="16"
+                         Foreground="Black"
                          Grid.Row="1"
-                         VerticalAlignment="Bottom"
                          Margin="0,0,0,30"
-                         Visibility="Hidden"
-                         Text="{Binding Password}"
-                         Style="{DynamicResource LoginInputStyle}"/>
-
+                         Opacity="0.9"
+                         VerticalContentAlignment="Center"
+                         Background="#abcdef"
+                         VerticalAlignment="Bottom"
+                         Text="{Binding Password, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=ShowPassword, Path=IsChecked}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
 
                 <CheckBox x:Name="ShowPassword"
                           Content="Show password"
                           Grid.Row="1"
                           VerticalAlignment="Bottom"
-                          Margin="15,0,0,0" />
+                          Margin="15,0,0,0">
+                </CheckBox>
 
                 <Button Grid.Row="2"
                         Command="{Binding Authentification}"
@@ -120,7 +143,6 @@
                         <Hyperlink TextDecorations="None" Foreground="Black">Terms</Hyperlink>
                     </TextBlock>
                 </StackPanel>
-
 
                 <Button Grid.Column="1"
                         Click="ButtonClose_Click"

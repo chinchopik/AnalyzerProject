@@ -13,8 +13,6 @@ namespace RemakeProject.ViewModels
 {
     class LoginViewModel : ViewModelBase
     {
-
-        public string _login;
         private string _password;
         public string Login
         {
@@ -31,6 +29,7 @@ namespace RemakeProject.ViewModels
             set
             {
                 _password = value;
+                OnPropertyChanged("Password");
             }
         }
 
@@ -44,17 +43,20 @@ namespace RemakeProject.ViewModels
 
         public void Auth()
         {
-            if (Properties.Settings.Default.UserLogin == "admin")
+            if(Login != null && Password != null)
             {
-                AnalyzerMenu analyzerMenu = new();
+                if (Login == "admin" && Password == "admin")
+                {
+                    AnalyzerMenu analyzerMenu = new();
 
-                Window window = Application.Current.MainWindow;
-                window.Close();
-                analyzerMenu.Show();
-            }
-            else
-            {
-                MessageBox.Show("Invalid login or password!", "Error!");
+                    Window window = Application.Current.Windows[0];
+                    window.Close();
+                    analyzerMenu.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid login or password!", "Error!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
         }
 

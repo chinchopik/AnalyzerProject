@@ -19,4 +19,12 @@
         <Setter Property="Content" Value="FileInput"/>
         <Setter Property="Background" Value="#abcdef"/>
     </Style>
+
+    <Style x:Key="LogoutButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Grid.Row" Value="0"/>
+        <Setter Property="Grid.Column" Value="3"/>
+        <Setter Property="Content" Value="Logout"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
 </ResourceDictionary>

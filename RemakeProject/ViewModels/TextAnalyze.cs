@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
 using RemakeProject.Commands;
+using RemakeProject.ViewModels.Commands;
+using RemakeProject.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,12 +65,22 @@ namespace RemakeProject.ViewModels
 
         public FileInput FileInput { get; set; }
 
+        public Auth LogOut { get; private set; }
+
         public TextAnalyze()
         {
             FileInput = new FileInput(this);
+            LogOut = new Auth(Logout);
 
         }
-
+        public void Logout()
+        {
+            LoginMenu loginMenu = new();
+            Window window = new();
+            window = Application.Current.Windows[0];
+            window.Close();
+            loginMenu.Show();
+        }
         public void OnExecute()
         {
 

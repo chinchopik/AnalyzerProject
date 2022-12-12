@@ -17,7 +17,7 @@
             <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="0.15*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
@@ -30,50 +30,42 @@
         </Grid.Background>
 
         <TextBlock Grid.Column="2"
-                   HorizontalAlignment="Center">
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
             <Hyperlink>
-                <TextBlock Text ="{Binding CurrentUser, Mode=OneWay}"/>
+                <TextBlock Text ="{Binding CurrentUser, Mode=OneWay, StringFormat= User: \{0\}}"/>
             </Hyperlink>
         </TextBlock>
         <TextBox x:Name="textBox"
                  Style="{DynamicResource InputBoxStyle}"
                  Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Content="Гласные:"
-                   Margin="0,10,0,0"
-                   Style="{DynamicResource LabelStyle}"/>
         <TextBlock x:Name="Vowels"
-                       Margin="35,15,0,0"
+                       Margin="20,15,0,0"
                        Style="{DynamicResource CountSymbolsStyle}"
-                       Text="{Binding Vowels, Mode=OneWay}"/>
+                       Text="{Binding Vowels, Mode=OneWay, StringFormat= Vowels: \{0\}}"/>
 
-        <Label Content="Согласные:"
-                   Margin="0,40,0,0"
-                   Style="{DynamicResource LabelStyle}"/>
         <TextBlock x:Name="Consonants"
-                       Margin="35,45,0,0"      
-                       Text="{Binding Consonants, Mode=OneWay}"
+                       Margin="20,45,0,0"      
+                       Text="{Binding Consonants, Mode=OneWay, StringFormat= Consonants: \{0\}}"
                        Style="{DynamicResource CountSymbolsStyle}"/>
 
-        <Label Content="Цифры:"
-                   Margin="0,70,0,0"
-                   Style="{DynamicResource LabelStyle}"/>
         <TextBlock x:Name="Numbers"
-                       Margin="35,75,0,0"
-                       
-                       Text="{Binding Numbers, Mode=OneWay}"
+                       Margin="20,75,0,0"               
+                       Text="{Binding Numbers, Mode=OneWay, StringFormat= Numbers: \{0\}}"
                        Style="{DynamicResource CountSymbolsStyle}"/>
 
-        <Label Content="Символы:"
-                   Margin="0,100,0,0"
-                   Style="{DynamicResource LabelStyle}"/>
         <TextBlock x:Name="SpecialSymbols"
-                       Margin="35,105,0,0"
-                       Text="{Binding SpecialSymbols, Mode=OneWay}"
+                       Margin="20,105,0,0"
+                       Text="{Binding SpecialSymbols, Mode=OneWay,StringFormat= Symbols: \{0\}}"
                        Style="{DynamicResource CountSymbolsStyle}"/>
 
         <Button x:Name="FileInputButton"
                 Command="{Binding Path=FileInput}"
                 Style="{DynamicResource FileInputStyle}"/>
+
+        <Button x:Name="LogoutButton"
+                Command="{Binding Path=LogOut}"
+                Style="{DynamicResource LogoutButtonStyle}"/>
     </Grid>
 </Window>
