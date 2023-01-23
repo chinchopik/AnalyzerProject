@@ -1,22 +1,21 @@
-﻿using RemakeProject.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace RemakeProject.Commands
+namespace RemakeProject.ViewModels.Commands
 {
-    class FileInput : ICommand
+    class DelegateCommand : ICommand
     {
-        TextAnalyze _fileInput;
-        public FileInput(TextAnalyze viewModel)
-        {
-            _fileInput = viewModel;
-        }
         public event EventHandler CanExecuteChanged;
 
+        private Action _execute;
+        public DelegateCommand(Action execute)
+        {
+            _execute = execute;
+        }
         public bool CanExecute(object parameter)
         {
             return true;
@@ -24,7 +23,7 @@ namespace RemakeProject.Commands
 
         public void Execute(object parameter)
         {
-            _fileInput.OnExecute();
+            _execute.Invoke();
         }
     }
 }

@@ -15,7 +15,6 @@
         AllowsTransparency="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
-
     <Window.DataContext>
         <lm:LoginViewModel/>
     </Window.DataContext>

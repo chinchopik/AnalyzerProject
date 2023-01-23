@@ -1,18 +1,12 @@
 ﻿using RemakeProject.ViewModels.Commands;
-using RemakeProject.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace RemakeProject.ViewModels
 {
     class LoginViewModel : ViewModelBase
     {
+        public ViewModelBase CurrentViewModel { get;}
+
         private string _password;
         public string Login
         {
@@ -34,12 +28,13 @@ namespace RemakeProject.ViewModels
         }
 
 
-        public Auth Authentification { get; private set; }
+        public DelegateCommand Authentification { get; private set; }
 
         public LoginViewModel()
         {
-            Authentification = new Auth(Auth);
+            Authentification = new DelegateCommand(Auth);
         }
+
 
         public void Auth()
         {
@@ -48,10 +43,11 @@ namespace RemakeProject.ViewModels
                 if (Login == "admin" && Password == "admin")
                 {
                     AnalyzerMenu analyzerMenu = new();
-
-                    Window window = Application.Current.Windows[0];
+                    var window = Application.Current.MainWindow;
                     window.Close();
+                    Application.Current.MainWindow = analyzerMenu;
                     analyzerMenu.Show();
+
                 }
                 else
                 {

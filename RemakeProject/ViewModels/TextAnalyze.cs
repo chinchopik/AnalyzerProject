@@ -1,26 +1,15 @@
-﻿using Microsoft.Win32;
-using RemakeProject.Commands;
+﻿
 using RemakeProject.ViewModels.Commands;
 using RemakeProject.Views;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace RemakeProject.ViewModels
 {
     class TextAnalyze : ViewModelBase
     {
-
+      
         private string _textBox;
-
         public string CurrentUser
         {
             get => Properties.Settings.Default.UserLogin;
@@ -63,29 +52,29 @@ namespace RemakeProject.ViewModels
             }
         }
 
-        public FileInput FileInput { get; set; }
+        public DelegateCommand FileInput { get; set; }
+        public DelegateCommand LogOut { get; private set; }
 
-        public Auth LogOut { get; private set; }
 
         public TextAnalyze()
         {
-            FileInput = new FileInput(this);
-            LogOut = new Auth(Logout);
+                      
+            FileInput = new DelegateCommand(GetFile);
+            LogOut = new DelegateCommand(Logout);
+        }
 
+        public void GetFile()
+        {
+            _textBox = FileTextInput.FileInput();
+            OnPropertyChanged("");
         }
         public void Logout()
         {
             LoginMenu loginMenu = new();
-            Window window = new();
-            window = Application.Current.Windows[0];
+            var window = Application.Current.MainWindow;
             window.Close();
-            loginMenu.Show();
-        }
-        public void OnExecute()
-        {
-
-            _textBox = FileTextInput.FileInput();
-            OnPropertyChanged("");
+            Application.Current.MainWindow = loginMenu;
+            loginMenu.Show();           
         }
     }
 
